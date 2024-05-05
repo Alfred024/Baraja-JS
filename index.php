@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <script type="text/javascript">
             function carga(){ 
-                posicion=0; elMovimiento=null;
+                posicion=0; cardClicked=null;
                 
                 // IE
                 if(navigator.userAgent.indexOf("MSIE")>=0 || navigator.userAgent.indexOf("Trident")>=0) navegador=0;
@@ -14,18 +14,13 @@
                     navegador=1;
             }
             
-            function evitaEventos(event){
-                // Funcion que evita que se ejecuten eventos adicionales
-                if(navegador==0)
-                {
-                    window.event.cancelBubble=true;
-                    window.event.returnValue=false;
-                }
-                if(navegador==1) event.preventDefault();
-            }
-            
+            // DUDA: QUÉ ES EL clientX
             function comienzoMovimiento(event, id){ 
-                elMovimiento=document.getElementById(id);
+                cardClicked=document.getElementById(id); // Selecciona la card
+                console.log(cardClicked.id);
+
+                elComienzoX=parseInt(cardClicked.style.left); // Estas variables son globales???
+                elComienzoY=parseInt(cardClicked.style.top);
                 if(navegador==0)
                 { 
                     cursorComienzoX=window.event.clientX+document.documentElement.scrollLeft+document.body.scrollLeft;
@@ -34,18 +29,20 @@
                     document.attachEvent("onmousemove", enMovimiento);
                     document.attachEvent("onmouseup", finMovimiento);
                 }
-                if(navegador==1)
+                if(navegador==1) // Acá entra
                 {    
+                    // console.log('MOVIMIENTO');
+                    console.log(event.clientX);
                     cursorComienzoX=event.clientX+window.scrollX;
                     cursorComienzoY=event.clientY+window.scrollY;
                     document.addEventListener("mousemove", enMovimiento, true); 
                     document.addEventListener("mouseup", finMovimiento, true);
                 }
                 
-                elComienzoX=parseInt(elMovimiento.style.left);
-                elComienzoY=parseInt(elMovimiento.style.top);
+                // elComienzoX=parseInt(cardClicked.style.left);
+                // elComienzoY=parseInt(cardClicked.style.top);
                 // Actualizo el posicion del elemento
-                elMovimiento.style.zIndex=++posicion;
+                cardClicked.style.zIndex=++posicion;
                 evitaEventos(event);
             }
             
@@ -62,8 +59,8 @@
                     yActual=event.clientY+window.scrollY;
                 }
                 
-                elMovimiento.style.left=(elComienzoX+xActual-cursorComienzoX)+"px";
-                elMovimiento.style.top=(elComienzoY+yActual-cursorComienzoY)+"px";
+                cardClicked.style.left=(elComienzoX+xActual-cursorComienzoX)+"px";
+                cardClicked.style.top=(elComienzoY+yActual-cursorComienzoY)+"px";
                 evitaEventos(event);
             }
             
@@ -78,6 +75,16 @@
                     document.removeEventListener("mousemove", enMovimiento, true);
                     document.removeEventListener("mouseup", finMovimiento, true); 
                 }
+            }
+
+            function evitaEventos(event){
+                // Funcion que evita que se ejecuten eventos adicionales
+                if(navegador==0)
+                {
+                    window.event.cancelBubble=true;
+                    window.event.returnValue=false;
+                }
+                if(navegador==1) event.preventDefault();
             }
         </script>
 

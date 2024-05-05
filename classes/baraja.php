@@ -6,18 +6,38 @@
     $cardsUsed = array();
     $cardsType = "CDPT";
 
-    $player1VerticalStartRef=30;
-    $player1HorizontalStartRef=20;
-
+    // JUGADOR 1
+    $playerAVerticalStartRef=30;
+    $playerAHorizontalStartRef=20;
     for ($index = 1; $index < 6; $index++) {
         $imagePath = getRandomImage();
-        $cartaNum = "carta".$index;
+        $cartaNum = $index;
         $cards .=  '
-        <div id="carta'.$cartaNum.'" style="top: '.$player1VerticalStartRef.'px; width: 100px; left: '.$player1HorizontalStartRef.'px; background-color: black; position: absolute; height: 80px; cursor: move; z-index: 10;" onmousedown="comienzoMovimiento(event, this.id);" onmouseover="this.style.cursor=cursor;">
+        <div id="cardPlayerA_'.$cartaNum.'" 
+            style="top: '.$playerAVerticalStartRef.'px; width: '.$cardsWidthSize.'px; left: '.$playerAHorizontalStartRef.'px; background-color: black; position: absolute; height: '.$cardsHeighthSize.'px; cursor: move; z-index: 10;"
+            onmousedown="comienzoMovimiento(event, this.id);">
             <center><img src="'.$imagePath.'"></center>
         </div>';
-        $player1HorizontalStartRef+=30;
+        $playerAHorizontalStartRef+=30;
     }
+
+    // JUGADOR 2
+    $player2VerticalStartRef=100;
+    $player2HorizontalStartRef=20;
+    for ($index = 1; $index < 6; $index++) {
+        $imagePath = getRandomImage();
+        $cartaNum = $index;
+        $cards .=  '
+        <div id="cardPlayerB_'.$cartaNum.'" 
+            style="bottom: '.$player2VerticalStartRef.'px; width: '.$cardsWidthSize.'px; right: '.$player2HorizontalStartRef.'px; background-color: black; position: absolute; height: '.$cardsHeighthSize.'px; cursor: move; z-index: 10;" onmousedown="comienzoMovimiento(event, this.id);">
+            <center><img src="'.$imagePath.'"></center>
+        </div>';
+        $player2HorizontalStartRef+=30;
+    }
+
+    // CARTAS SOBRANTES
+
+
     return $cards;
 
 
