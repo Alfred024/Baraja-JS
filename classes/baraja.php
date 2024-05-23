@@ -29,7 +29,8 @@
         $cartaNum = $index;
         $cards .=  '
         <div id="cardPlayerB_'.$cartaNum.'" 
-            style="bottom: '.$player2VerticalStartRef.'px; width: '.$cardsWidthSize.'px; right: '.$player2HorizontalStartRef.'px; background-color: black; position: absolute; height: '.$cardsHeighthSize.'px; cursor: move; z-index: 10;" onmousedown="comienzoMovimiento(event, this.id);">
+            style="top: '.$player2VerticalStartRef.'px; width: '.$cardsWidthSize.'px; left: '.$player2HorizontalStartRef.'px; background-color: black; position: absolute; height: '.$cardsHeighthSize.'px; cursor: move; z-index: 10;"
+            onmousedown="comienzoMovimiento(event, this.id);">
             <center><img src="'.$imagePath.'"></center>
         </div>';
         $player2HorizontalStartRef+=30;

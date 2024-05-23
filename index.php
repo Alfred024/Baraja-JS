@@ -19,6 +19,7 @@
                 cardClicked=document.getElementById(id); // Selecciona la card
                 console.log(cardClicked.id);
 
+                console.log(cardClicked.style.left);
                 elComienzoX=parseInt(cardClicked.style.left); // Estas variables son globales???
                 elComienzoY=parseInt(cardClicked.style.top);
                 if(navegador==0)
@@ -31,12 +32,12 @@
                 }
                 if(navegador==1) // Acá entra
                 {    
-                    // console.log('MOVIMIENTO');
+                    console.log('MOVIMIENTO');
                     console.log(event.clientX);
                     cursorComienzoX=event.clientX+window.scrollX;
                     cursorComienzoY=event.clientY+window.scrollY;
-                    document.addEventListener("mousemove", enMovimiento, true); 
-                    document.addEventListener("mouseup", finMovimiento, true);
+                    document.addEventListener("mousemove", enMovimiento, true);
+                    document.addEventListener("mouseup", finMovimiento, true); //Qué es el objeto 'finMovimiento'
                 }
                 
                 // elComienzoX=parseInt(cardClicked.style.left);
